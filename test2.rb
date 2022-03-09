@@ -156,9 +156,11 @@ end
 
 #317
 n = Option2.new
-n.current_number = 1317
+1317.times do |num| 
+n.current_number = num
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 n.large_numbers = large_numbers
 puts n.get_number_name
 
+end
