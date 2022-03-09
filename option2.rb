@@ -91,9 +91,9 @@ class Option2
 	def get_name(current_number, hash_numbers)
 
 	  hash_numbers.each do |key, value|
-				if value[:number] == current_number
-					return value[:name]
-				end
+			if value[:number] == current_number
+				return value[:name]
+			end
 	  end
 	  return nil
 	end
@@ -113,7 +113,7 @@ end
 
 #317
 n = Option2.new
-1317.times do |number|
+(119..129).each do |number|
 	n.current_number = number
 	puts n.get_number_name
 end
