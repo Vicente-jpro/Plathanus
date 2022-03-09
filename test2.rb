@@ -57,27 +57,26 @@ class Option2
 			number_name = get_name(@current_number, small_numbers)
 			if number_name.nil?
 				array_of_numbers = convert_number_to_array(@current_number)
-				number1 = get_first_number_and_add_zero_from_array(array_of_numbers)
-				number2 = get_last_number_from_array(array_of_numbers)
-				number_name = "#{get_name(number1, small_numbers)} #{get_name(number2, smallest_numbers)}"
-
+				number_name = get_name_of_two_digits(array_of_numbers)
 			end
 		elsif larg_number_hundred?
 			number_name = get_name(@current_number, large_numbers)
 			if number_name.nil?
 				array_of_numbers = convert_number_to_array(@current_number)
 				number1 = get_first_number_from_array(array_of_numbers)
-				number2 = get_middle_number_and_add_zero_from_array(array_of_numbers)
-				number3 = get_last_number_from_array(array_of_numbers)
-				puts "number1 #{number1}"
-				puts "number2 #{number2}"
-				puts "number3 #{number3}"
-				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}  #{get_name(number3, small_numbers)}"
+				array_of_numbers.shift
+				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name_of_two_digits(array_of_numbers)}"
 
 			end
 		end
 
 		return number_name 
+	end
+	def get_name_of_two_digits(array_of_numbers)
+  	  number1 = get_first_number_and_add_zero_from_array(array_of_numbers)
+	  number2 = get_last_number_from_array(array_of_numbers)
+	  number_name = "#{get_name(number1, small_numbers)} #{get_name(number2, smallest_numbers)}"
+	  return number_name
 	end
 
 	def get_first_number_and_add_zero_from_array(array_of_numbers)
@@ -133,7 +132,7 @@ end
 
 
 n = Option2.new
-n.current_number = 101
+n.current_number = 122
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 n.large_numbers = large_numbers
