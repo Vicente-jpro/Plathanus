@@ -55,18 +55,42 @@ class Option2
 			number_name = get_name(@current_number, smallest_numbers)
 		elsif small_number?
 			number_name = get_name(@current_number, small_numbers)
+			if number_name.nil?
+				array_of_numbers = convert_number_to_array(@current_number)
+				number1 = (array_of_numbers.first.to_s+"0").to_i
+				number2 = (array_of_numbers.last.to_s).to_i
+				number_name = "#{get_name(number1, small_numbers)} #{get_name(number2, smallest_numbers)}"
+
+			end
 		end
 
 		return number_name 
 	end
 
+
+	def convert_number_to_array(number)
+			@number_storage = []
+
+			while @current_number > 0
+				last_number = @current_number%10
+				@number_storage << last_number.to_s
+				@current_number /= 10
+				
+			end
+			return @number_storage.reverse
+	end
+
+
+
 	def get_name(current_number, hash_numbers)
 
+		puts current_number
 	  hash_numbers.each do |key, value|
-				if value[:number] == @current_number
+				if value[:number] == current_number
 					return value[:name]
 				end
 	  end
+	  return nil
 	end
 
 	def smallest_number?
@@ -80,7 +104,7 @@ end
 
 
 n = Option2.new
-n.current_number = 2
+n.current_number = 36
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 puts n.get_number_name
