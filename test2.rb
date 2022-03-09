@@ -57,8 +57,8 @@ class Option2
 			number_name = get_name(@current_number, small_numbers)
 			if number_name.nil?
 				array_of_numbers = convert_number_to_array(@current_number)
-				number1 = (array_of_numbers.first.to_s+"0").to_i
-				number2 = (array_of_numbers.last.to_s).to_i
+				number1 = get_first_number_from_array(array_of_numbers)
+				number2 = get_last_number_from_array(array_of_numbers)
 				number_name = "#{get_name(number1, small_numbers)} #{get_name(number2, smallest_numbers)}"
 
 			end
@@ -67,7 +67,13 @@ class Option2
 		return number_name 
 	end
 
+	def get_first_number_from_array(array_of_numbers)
+	  (array_of_numbers.first.to_s+"0").to_i
+	end
 
+	def get_last_number_from_array(array_of_numbers)
+	  (array_of_numbers.last.to_s).to_i
+	end
 	def convert_number_to_array(number)
 			@number_storage = []
 
@@ -99,12 +105,16 @@ class Option2
 	def small_number?
 		((@current_number >= 20) and (@current_number <= 99))
 	end
+
+	def larg_number_hundred?
+		((@current_number >= 100) and (@current_number <= 999))
+	end
 end
 
 
 
 n = Option2.new
-n.current_number = 36
+n.current_number = 99
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 puts n.get_number_name
