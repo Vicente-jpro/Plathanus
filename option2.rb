@@ -9,7 +9,9 @@ smallest_numbers = {
 	six: {number: 6, name: "six" },
 	seven: {number: 7, name: "seven" },
 	eigth: {number: 8, name: "eigth" },
-	nine: {number: 9, name: "nine" },
+	nine: {number: 9, name: "nine" }
+}
+smallest_numbers_max = {
 	ten: {number: 10, name: "ten" },
 	eleven: {number: 11, name: "eleven" },
 	twelve: {number: 12, name: "twelve" },
@@ -45,14 +47,15 @@ join_and = "and"
 
 class Option2
 	attr_accessor :number_storage, :current_number,
-				  :smallest_numbers, :small_numbers, :large_numbers
+				  :smallest_numbers, :smallest_numbers_max, :small_numbers, :large_numbers
 
 	def get_number_name
 	  array_of_numbers = put_numbers_into_array
 	  number_name = ""
-
 	  if smallest_number?
 	  	number_name = get_name_from_smallest_number(array_of_numbers, smallest_numbers)
+	  elsif smallest_numbers_max?
+	  	number_name = get_name_from_smallest_number_max(array_of_numbers, smallest_numbers_max)
 	  elsif small_number?
 	  	number_name = give_a_name_to_numbers(array_of_numbers, small_numbers, smallest_numbers)
 	  else
@@ -64,12 +67,13 @@ class Option2
 
 		def put_numbers_into_array
 			
-			@number_storage = [0]
+			@number_storage = []
 
 			while @current_number > 0
 				last_number = @current_number%10
 				@number_storage << last_number.to_s
 				@current_number /= 10
+				
 			end
 			return @number_storage.reverse
 		end
@@ -81,9 +85,22 @@ class Option2
 
 		def get_name_from_smallest_number(array_of_numbers, smallest_numbers)
 			
-			number_name = ""
-			@current_number = concatinate_array_of_numbers(array_of_numbers)
+			puts @current_number
 			smallest_numbers.each do |key,value| 
+			 number_position = value[:number]
+
+				 if value[:number] == @current_number
+				  number_name += key.to_s
+				  break
+				end
+			end
+			return number_name
+		end
+
+		def get_name_from_smallest_number_max(array_of_numbers, smallest_numbers_max)
+			
+			number_name = ""
+			smallest_numbers_max.each do |key,value| 
 			 number_position = value[:number]
 
 				 if value[:number] == @current_number
@@ -97,7 +114,6 @@ class Option2
 		def get_name_from_small_number(array_of_numbers, small_numbers)
 			puts small_numbers
 			number_name = ""
-			@current_number = concatinate_array_of_numbers(array_of_numbers)
 			puts "complete number = #{@current_number}"
 
 			small_numbers.each do |key,value| 
@@ -113,14 +129,11 @@ class Option2
 		end
 
 
-		def concatinate_array_of_numbers(array_of_numbers)
-		  return (array_of_numbers[0]+""+array_of_numbers[1]).to_i
-		end
-
-		def small_number?
-			@current_number < 100
-		end
+		
 		def smallest_number?
+			@current_number <= 9
+		end
+		def smallest_numbers_max?
 			@current_number <= 19
 		end
 
@@ -129,7 +142,7 @@ end
 
 
 n = Option2.new
-n.current_number = 11
+n.current_number = 13
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 puts n.get_number_name
