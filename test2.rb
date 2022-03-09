@@ -57,9 +57,22 @@ class Option2
 			number_name = get_name(@current_number, small_numbers)
 			if number_name.nil?
 				array_of_numbers = convert_number_to_array(@current_number)
-				number1 = get_first_number_from_array(array_of_numbers)
+				number1 = get_first_number_and_add_zero_from_array(array_of_numbers)
 				number2 = get_last_number_from_array(array_of_numbers)
 				number_name = "#{get_name(number1, small_numbers)} #{get_name(number2, smallest_numbers)}"
+
+			end
+		elsif larg_number_hundred?
+			number_name = get_name(@current_number, large_numbers)
+			if number_name.nil?
+				array_of_numbers = convert_number_to_array(@current_number)
+				number1 = get_first_number_from_array(array_of_numbers)
+				number2 = get_middle_number_and_add_zero_from_array(array_of_numbers)
+				number3 = get_last_number_from_array(array_of_numbers)
+				puts "number1 #{number1}"
+				puts "number2 #{number2}"
+				puts "number3 #{number3}"
+				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}  #{get_name(number3, small_numbers)}"
 
 			end
 		end
@@ -67,8 +80,15 @@ class Option2
 		return number_name 
 	end
 
-	def get_first_number_from_array(array_of_numbers)
+	def get_first_number_and_add_zero_from_array(array_of_numbers)
 	  (array_of_numbers.first.to_s+"0").to_i
+	end
+	def get_middle_number_and_add_zero_from_array(array_of_numbers)
+		array_of_numbers.shift
+		return (array_of_numbers.first.to_s+"0").to_i
+	end
+	def get_first_number_from_array(array_of_numbers)
+	  (array_of_numbers.first.to_s).to_i
 	end
 
 	def get_last_number_from_array(array_of_numbers)
@@ -90,7 +110,6 @@ class Option2
 
 	def get_name(current_number, hash_numbers)
 
-		puts current_number
 	  hash_numbers.each do |key, value|
 				if value[:number] == current_number
 					return value[:name]
@@ -114,8 +133,9 @@ end
 
 
 n = Option2.new
-n.current_number = 99
+n.current_number = 101
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
+n.large_numbers = large_numbers
 puts n.get_number_name
 
