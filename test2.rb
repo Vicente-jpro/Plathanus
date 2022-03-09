@@ -49,36 +49,38 @@ class Option2
 
 	def get_number_name
 
-		
+		number_name = ""
 
 		if smallest_number?
-			@smallest_numbers.each do |key, value|
-				if value[:number] == @current_number
-					return value[:name]
-				end
-			end
-		elsif ((@current_number >= 20) and (@current_number <= 99))
-			@small_numbers.each do |key, value|
-				if value[:number] == @current_number
-					return value[:name]
-				end
-			end
-		
-
+			number_name = get_name(@current_number, smallest_numbers)
+		elsif small_number?
+			number_name = get_name(@current_number, small_numbers)
 		end
 
-		return "NOT FOUND" 
+		return number_name 
+	end
+
+	def get_name(current_number, hash_numbers)
+
+	  hash_numbers.each do |key, value|
+				if value[:number] == @current_number
+					return value[:name]
+				end
+	  end
 	end
 
 	def smallest_number?
 	  ( (@current_number >= 0) and (@current_number<=19) )
+	end
+	def small_number?
+		((@current_number >= 20) and (@current_number <= 99))
 	end
 end
 
 
 
 n = Option2.new
-n.current_number = 20
+n.current_number = 2
 n.smallest_numbers = smallest_numbers
 n.small_numbers = small_numbers
 puts n.get_number_name
