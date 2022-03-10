@@ -115,7 +115,7 @@ end
 
 #317
 n = Option2.new
-	n.current_number = 21
+	n.current_number = 101
 	
 	  puts n.get_number_name
 
