@@ -24,16 +24,7 @@ class Option2
 		elsif larg_number_hundred?
 			number_name = get_name(@current_number, large_numbers)
 			if number_name.nil?
-				number1 = @current_number/100
-				number2 = @current_number%100
-
-				if number2 >19		
-				  array_of_numbers = convert_number_to_array(number2)
-				  array_of_numbers.shift
-				  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{ get_name_of_two_digits(array_of_numbers)}"
-				else
-				  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}"
-			 	end
+				number_name = get_a_new_name_built(@current_number)
 			end
 		else
 			number_name = get_name(@current_number, large_numbers)
@@ -41,16 +32,15 @@ class Option2
 				array_of_numbers = convert_number_to_array(@current_number)
 				number1 = get_first_number_from_array(array_of_numbers)
 			    array_of_numbers.shift
-
-			    if smallest_number?
+			    
+			    if small_number?
+			    	puts "fff"
+			    else
 			    	number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
-			    elsif small_number?
-			    	puts "small_number"
-			    elsif larg_number_hundred?
-			    	number_name = "#{get_name(number1, smallest_numbers)} thousand, #{get_name_of_three_digits(array_of_numbers)}"
-				else 
-					number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
-				end
+			    end
+		    	
+				name = number_name.to_s
+				number_name = name.gsub(' and zero hundred', '')
 			end
 		end
 
@@ -69,18 +59,44 @@ class Option2
 	  array_of_numbers.shift
 	  number2 = (array_of_numbers.first.to_s+""+array_of_numbers.last.to_s).to_i
 	  @current_number = number2
+	  
 
 	  if smallest_number?
 	  	number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}"
-	  else
-	  	number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, small_numbers)}"
+	  elsif small_number?
+	  	number_name = get_name(@current_number, small_numbers)
+		if number_name.nil?
+			number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_a_new_name_built(number2)}"
+  		end
+	  	
 	  end
+	  name = number_name.to_s
+	  number_name = name.gsub('and zero', '')
+	  number_name = name.gsub('zero','')
 	  return number_name
 	end
 
 	def get_a_new_name_built(unknown_number)
-	  array_of_numbers = convert_number_to_array(unknown_number)
-	  number_name = get_name_of_two_digits(array_of_numbers)
+	 
+
+	  if small_number?
+	  	array_of_numbers = convert_number_to_array(unknown_number)
+	    number_name = get_name_of_two_digits(array_of_numbers)
+	  elsif larg_number_hundred?
+			number1 = unknown_number/100
+			number2 = unknown_number%100
+
+			if number2 >19		
+			  array_of_numbers = convert_number_to_array(number2)
+			  array_of_numbers.shift
+			  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{ get_name_of_two_digits(array_of_numbers)}"
+			else
+			  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}"
+		    end
+	   else
+
+	  end
+
 	  return number_name
 	end
 
@@ -115,6 +131,10 @@ end
 
 #317
 n = Option2.new
-	n.current_number = 101
+(0..1021).each do |num|
+	n.current_number = num
 	
 	  puts n.get_number_name
+end
+
+
