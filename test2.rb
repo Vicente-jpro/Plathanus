@@ -33,12 +33,8 @@ class Option2
 				number1 = get_first_number_from_array(array_of_numbers)
 			    array_of_numbers.shift
 			    
-			    if small_number?
-			    	puts "fff"
-			    else
 			    	number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
-			    end
-		    	
+			   
 				name = number_name.to_s
 				number_name = name.gsub(' and zero hundred', '')
 			end
