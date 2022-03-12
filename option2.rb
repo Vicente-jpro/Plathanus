@@ -27,16 +27,24 @@ class Option2
 				number_name = get_a_new_name_built(@current_number)
 			end
 		else
+			# 1023
 			number_name = get_name(@current_number, large_numbers)
 			if number_name.nil?
 				array_of_numbers = convert_number_to_array(@current_number)
 				number1 = get_first_number_from_array(array_of_numbers)
 			    array_of_numbers.shift
 			    
-			    	number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
-			   
+				if number_less_than_hundred?(@current_number)
+				  number_name = "#{get_name(number1, smallest_numbers)} thousand, #{get_name_of_three_digits(array_of_numbers)}"
+				  name = number_name.to_s
+				  number_name = name.gsub('  hundred', '')
+				else
+		 		 number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
+				end
+				
 				name = number_name.to_s
 				number_name = name.gsub(' and zero hundred', '')
+				number_name = number_name.gsub(' and zero ', '')
 			end
 		end
 
@@ -70,6 +78,7 @@ class Option2
 	  name = number_name.to_s
 	  number_name = name.gsub('and zero', '')
 	  number_name = name.gsub('zero','')
+	
 	  return number_name
 	end
 
@@ -84,7 +93,7 @@ class Option2
 			number2 = unknown_number%100
 
 			if number2 >19		
-			   if number_end_with_zero(number2)
+			   if number_end_with_zero?(number2)
 				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, small_numbers)}"
 			   else
 				array_of_numbers = convert_number_to_array(number2)
@@ -115,10 +124,13 @@ class Option2
 			return @number_storage.reverse
 	end
 
-	def number_end_with_zero(number)
+	def number_end_with_zero?(number)
 		number%10 == 0
 	end
 
+	def number_less_than_hundred?(number)
+		number%1000 < 100
+	end
 
 	def get_name(current_number, hash_numbers)
 
@@ -135,8 +147,10 @@ end
 
 #317
 n = Option2.new
-(0..1021).each do |num|
+(4000..4001).each do |num|
 	n.current_number = num
 	
 	  puts n.get_number_name
 end
+
+

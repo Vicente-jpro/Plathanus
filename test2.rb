@@ -33,7 +33,7 @@ class Option2
 				number1 = get_first_number_from_array(array_of_numbers)
 			    array_of_numbers.shift
 			    
-			    	number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
+			    number_name = "#{get_name(number1, smallest_numbers)} thousand, and #{get_name_of_three_digits(array_of_numbers)}"
 			   
 				name = number_name.to_s
 				number_name = name.gsub(' and zero hundred', '')
@@ -134,7 +134,7 @@ end
 
 #317
 n = Option2.new
-(0..1021).each do |num|
+(1000..1021).each do |num|
 	n.current_number = num
 	
 	  puts n.get_number_name
