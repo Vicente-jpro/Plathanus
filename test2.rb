@@ -87,9 +87,13 @@ class Option2
 			number2 = unknown_number%100
 
 			if number2 >19		
-			  array_of_numbers = convert_number_to_array(number2)
-			  array_of_numbers.shift
-			  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{ get_name_of_two_digits(array_of_numbers)}"
+			   if number_end_with_zero(number2)
+				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, small_numbers)}"
+			   else
+				array_of_numbers = convert_number_to_array(number2)
+				array_of_numbers.shift
+				number_name = "#{get_name(number1, smallest_numbers)} hundred and #{ get_name_of_two_digits(array_of_numbers)}"
+				end
 			else
 			  number_name = "#{get_name(number1, smallest_numbers)} hundred and #{get_name(number2, smallest_numbers)}"
 		    end
@@ -114,6 +118,9 @@ class Option2
 			return @number_storage.reverse
 	end
 
+	def number_end_with_zero(number)
+		number%10 == 0
+	end
 
 
 	def get_name(current_number, hash_numbers)
@@ -136,5 +143,7 @@ n = Option2.new
 	
 	  puts n.get_number_name
 end
+
+
 
 
