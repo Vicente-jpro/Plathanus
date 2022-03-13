@@ -2,6 +2,7 @@ require "./option2.rb"
 RSpec.describe "Option2" do
 
 let(:n) { Option2.new}
+let(:array_of_numbers){ [1,2,3] }
 
     describe "know numbers" do
         it "returns zero" do 
@@ -82,5 +83,23 @@ let(:n) { Option2.new}
         end
     
     end
+
+    describe "get a number from array" do 
+
+        it "returns the first element from the array -> 1" do 
+            expect(n.get_first_number_from_array(array_of_numbers)).to eq(1)
+        end
+
+        it "returns the last element from the array -> 3" do 
+            expect(n.get_last_number_from_array(array_of_numbers)).to eq(3)
+        end
+        it "returns the first element from the array -> 1 and concat a 0. It returns 10 " do 
+            expect(n.get_first_number_and_add_zero_from_array(array_of_numbers)).to eq(10)
+        end
+
+    end
+
+
+
 
 end

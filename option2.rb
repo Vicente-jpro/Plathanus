@@ -10,7 +10,6 @@ class Option2
 	attr_accessor :number_storage, :current_number
 
 	def get_number_name
-		
 
 		number_name = nil
 
