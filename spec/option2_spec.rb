@@ -99,7 +99,4 @@ let(:array_of_numbers){ [1,2,3] }
 
     end
 
-
-
-
 end
