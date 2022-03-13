@@ -1,9 +1,10 @@
 module ValidateHash
-	
+  
 	def number_more_than_one_thousand?(number)
 		number >= 2000
 	end
-
+	
+ private
 	def smallest_number?
 	  ( (@current_number >= 0) and (@current_number<=19) )
 	end
