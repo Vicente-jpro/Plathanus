@@ -4,7 +4,6 @@ module ValidateHash
 		number >= 2000
 	end
 
-  private
 	def smallest_number?
 	  ( (@current_number >= 0) and (@current_number<=19) )
 	end
