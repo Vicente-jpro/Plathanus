@@ -59,17 +59,28 @@ let(:n) { Option2.new}
 
     describe "validation interval numbers to use hash" do 
         it "return true if number between 0 and 19" do 
-            n.current_number = 17
+            n.current_number = 14
             expect(n.smallest_number?).to eq(true)
         end
         it "return true if number between 20 and 99" do 
-            n.current_number = 21
+            n.current_number = 24
             expect(n.small_number?).to eq(true)
         end
         it "return true if number between 100 and 999" do 
             n.current_number = 124
             expect(n.larg_number_hundred?).to eq(true)
         end
+
+        it "return if number ends with 0" do
+            number = 40
+            expect(n.number_end_with_zero?(number) ).to eq(true)    
+        end
+
+        it "return if number is less than 100" do
+            number = 40
+            expect(n.number_end_with_zero?(number) ).to eq(true)    
+        end
+    
     end
 
 end
